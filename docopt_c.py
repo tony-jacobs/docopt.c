@@ -552,6 +552,7 @@ def main():
     doc = args['<docopt>']
     usage = docopt.parse_section('usage:', doc)
     primaryCommand = usage[0].splitlines()[1].lstrip().split()[0];
+    primaryCommand = primaryCommand.replace('-','_')
 
     error_str_l = 'More than one ', '"usage:" (case-insensitive)', ' not found.'
     usage = {0: error_str_l[1:], 1: usage[0] if usage else None}.get(len(usage), error_str_l[:2])
