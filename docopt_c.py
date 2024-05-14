@@ -302,9 +302,11 @@ static int parse_args(struct ${prefix}Tokens *ts, struct Elements *elements) {
     return ret;
 }
 
-static void printHelp( struct DocoptArgs *args )
+static void printHelp( struct DocoptArgs *args, const char *version )
 {
-    for (int j = 0; j < $help_message_n; j++)
+    printf( "%s (v%s)\\n", args->help_message[0], version );
+
+    for (int j = 1; j < $help_message_n; j++)
         puts(args->help_message[j]);
 }
 
@@ -402,7 +404,7 @@ struct DocoptArgs ${primary_command}CommandLineParser( int argc, char *argv[], v
             if( args.version )
                 printVersion( version );
             else
-                printHelp( &args );
+                printHelp( &args, version );
 
             helpCallback( EXIT_FAILURE );
         }
